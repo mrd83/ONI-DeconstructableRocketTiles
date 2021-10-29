@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Reflection;
-using Harmony;
+using HarmonyLib;
 using UnityEngine;
 
 namespace OxygenNotIncluded.Mods.DeconstructableRocketTiles
 {
-	public static class Loader
-	{
+	public class Loader : KMod.UserMod2
+    {
 		public static AssemblyName AssemblyName => Assembly.GetExecutingAssembly().GetName();
 		public static Version Version => AssemblyName.Version;
 		public static string Name => AssemblyName.Name;
 		
 		
-		public static void OnLoad()
+		public override void OnLoad(Harmony harmony)
 		{
-
-			// Called before any other mod functions (including patches), when Mod is loaded by the Game
+            // Called before any other mod functions (including patches), when Mod is loaded by the Game
 			Console.WriteLine($"Mod <{Name}> loaded: {Version}");
+            harmony.PatchAll();
 		}
 	}
 }
